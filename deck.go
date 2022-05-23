@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"math/rand"
+	"strings"
 )
 
 type deck []card
@@ -23,12 +25,12 @@ func newDeck() deck {
 
 func (d deck) toString() string {
 
-	var deckStr = ""
+	var cards []string
 	for _, card := range d {
-		deckStr += " " + card.toString()
+		cards = append(cards, card.toString())
 	}
 
-	return deckStr
+	return strings.Join(cards, " ")
 }
 
 func (d deck) display() {
@@ -50,6 +52,6 @@ func (d deck) deal(handSize int) {
 	}
 }
 
-func (d deck) store() {
-	//os.WriteFile("deck", []byte(d.toString()), os.FileMode().Perm())
+func (d deck) saveToFile(filename string) error {
+	return ioutil.WriteFile(filename, []byte(d.toString()), 0666)
 }
