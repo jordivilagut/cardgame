@@ -21,6 +21,16 @@ func newDeck() deck {
 	return d
 }
 
+func (d deck) toString() string {
+
+	var deckStr = ""
+	for _, card := range d {
+		deckStr += " " + card.toString()
+	}
+
+	return deckStr
+}
+
 func (d deck) display() {
 	for _, card := range d {
 		card.display()
@@ -33,9 +43,13 @@ func (d deck) shuffle() {
 	d.display()
 }
 
-func (d deck) deal() {
-	fmt.Println("Deal 4 cards.")
-	for i := 0; i < 4; i++ {
+func (d deck) deal(handSize int) {
+	fmt.Printf("Deal %d cards.\n", handSize)
+	for i := 0; i < handSize; i++ {
 		d[rand.Intn(len(d))].display()
 	}
+}
+
+func (d deck) store() {
+	//os.WriteFile("deck", []byte(d.toString()), os.FileMode().Perm())
 }
