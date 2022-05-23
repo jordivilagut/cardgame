@@ -1,4 +1,4 @@
-package enum
+package other
 
 type suits int
 

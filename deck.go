@@ -1,4 +1,4 @@
-package enum
+package main
 
 import (
 	"fmt"
@@ -23,22 +23,19 @@ func newDeck() deck {
 
 func (d deck) display() {
 	for _, card := range d {
-		fmt.Println(card)
+		card.display()
 	}
 }
 
 func (d deck) shuffle() {
 	fmt.Println("Shuffle the cards.")
 	rand.Shuffle(len(d), func(i, j int) { d[i], d[j] = d[j], d[i] })
-
-	for _, card := range d {
-		fmt.Println(card)
-	}
+	d.display()
 }
 
 func (d deck) deal() {
 	fmt.Println("Deal 4 cards.")
 	for i := 0; i < 4; i++ {
-		fmt.Println(d[rand.Intn(len(d))])
+		d[rand.Intn(len(d))].display()
 	}
 }
