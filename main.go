@@ -1,8 +1,25 @@
 package main
 
+import (
+	"os"
+)
+
 func main() {
+
 	deck := newDeck()
-	deck.display()
-	deck.shuffle()
-	deck.deal(5)
+
+	saveError := deck.saveToFile("cards")
+	if saveError != nil {
+		printError(saveError)
+	}
+
+	deckFromFile := newDeckFromFile("cards")
+	deckFromFile.display()
+	deckFromFile.shuffle()
+	deckFromFile.deal(5)
+
+	deleteError := os.Remove("cards")
+	if deleteError != nil {
+		printError(deleteError)
+	}
 }

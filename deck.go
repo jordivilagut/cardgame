@@ -11,13 +11,28 @@ type deck []card
 
 func newDeck() deck {
 	var d deck
-	var suits = [...]string{"Clubs", "Diamonds", "Hearts", "Spades"}
 
 	for _, suit := range suits {
 		for j := 1; j < 13; j++ {
 			card := card{j, suit}
 			d = append(d, card)
 		}
+	}
+
+	return d
+}
+
+func newDeckFromFile(filename string) deck {
+	bytes, err := ioutil.ReadFile(filename)
+	if err != nil {
+		printError(err)
+		printErrorAndQuit(err, readError)
+	}
+
+	cardStrings := strings.Split(string(bytes), separator)
+	var d deck
+	for _, str := range cardStrings {
+		d = append(d, toCard(str))
 	}
 
 	return d
@@ -30,7 +45,11 @@ func (d deck) toString() string {
 		cards = append(cards, card.toString())
 	}
 
-	return strings.Join(cards, " ")
+	return strings.Join(cards, separator)
+}
+
+func (d deck) toByteArray() []byte {
+	return []byte(d.toString())
 }
 
 func (d deck) display() {
@@ -53,5 +72,5 @@ func (d deck) deal(handSize int) {
 }
 
 func (d deck) saveToFile(filename string) error {
-	return ioutil.WriteFile(filename, []byte(d.toString()), 0666)
+	return ioutil.WriteFile(filename, d.toByteArray(), defaultPermission)
 }
