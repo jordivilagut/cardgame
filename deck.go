@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
-	"math/rand"
 	"strings"
 )
 
@@ -60,14 +59,14 @@ func (d deck) display() {
 
 func (d deck) shuffle() {
 	fmt.Println("Shuffle the cards.")
-	rand.Shuffle(len(d), func(i, j int) { d[i], d[j] = d[j], d[i] })
+	random().Shuffle(len(d), func(i, j int) { d[i], d[j] = d[j], d[i] })
 	d.display()
 }
 
 func (d deck) deal(handSize int) {
 	fmt.Printf("Deal %d cards.\n", handSize)
 	for i := 0; i < handSize; i++ {
-		d[rand.Intn(len(d)-1)].display()
+		d[random().Intn(len(d)-1)].display()
 	}
 }
 

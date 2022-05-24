@@ -3,7 +3,9 @@ package main
 import (
 	"fmt"
 	"io/fs"
+	"math/rand"
 	"os"
+	"time"
 )
 
 var (
@@ -22,6 +24,11 @@ func printError(err error) {
 func printErrorAndQuit(err error, code int) {
 	printError(err)
 	os.Exit(code)
+}
+
+func random() *rand.Rand {
+	source := rand.NewSource(time.Now().UnixNano())
+	return rand.New(source)
 }
 
 func deleteFile(filename string) {
