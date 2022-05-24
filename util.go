@@ -23,3 +23,10 @@ func printErrorAndQuit(err error, code int) {
 	printError(err)
 	os.Exit(code)
 }
+
+func deleteFile(filename string) {
+	err := os.Remove(filename)
+	if err != nil {
+		printError(err)
+	}
+}

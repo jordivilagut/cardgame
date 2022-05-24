@@ -67,10 +67,13 @@ func (d deck) shuffle() {
 func (d deck) deal(handSize int) {
 	fmt.Printf("Deal %d cards.\n", handSize)
 	for i := 0; i < handSize; i++ {
-		d[rand.Intn(len(d))].display()
+		d[rand.Intn(len(d)-1)].display()
 	}
 }
 
-func (d deck) saveToFile(filename string) error {
-	return ioutil.WriteFile(filename, d.toByteArray(), defaultPermission)
+func (d deck) saveToFile(filename string) {
+	err := ioutil.WriteFile(filename, d.toByteArray(), defaultPermission)
+	if err != nil {
+		printError(err)
+	}
 }
