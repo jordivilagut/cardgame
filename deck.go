@@ -60,13 +60,13 @@ func (d deck) display() {
 func (d deck) shuffle() {
 	fmt.Println("Shuffle the cards.")
 	random().Shuffle(len(d), func(i, j int) { d[i], d[j] = d[j], d[i] })
-	d.display()
 }
 
 func (d deck) deal(handSize int) {
 	fmt.Printf("Deal %d cards.\n", handSize)
-	for i := 0; i < handSize; i++ {
-		d[random().Intn(len(d)-1)].display()
+	cards := d[:handSize]
+	for _, card := range cards {
+		card.display()
 	}
 }
 

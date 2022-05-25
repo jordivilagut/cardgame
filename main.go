@@ -5,8 +5,11 @@ func main() {
 	deck := newDeck()
 	deck.saveToFile("cards")
 	deckFromFile := newDeckFromFile("cards")
-	deckFromFile.display()
 	deckFromFile.shuffle()
-	deckFromFile.deal(5)
+	deckFromFile.deal(2)
+	deckFromFile.shuffle()
+	deckFromFile.deal(2)
+	deckFromFile.shuffle()
+	deckFromFile.deal(2)
 	deleteFile("cards")
 }
