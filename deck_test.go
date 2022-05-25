@@ -20,9 +20,11 @@ func TestNewDeck(t *testing.T) {
 }
 
 func TestNewDeckFromFile(t *testing.T) {
+
+	deleteFile("_decktesting")
 	deck := newDeck()
-	deck.saveToFile("cards")
-	deckFromFile := newDeckFromFile("cards")
+	deck.saveToFile("_decktesting")
+	deckFromFile := newDeckFromFile("_decktesting")
 
 	if len(deckFromFile) != len(deck) {
 		t.Error("Deck from file has different length.")
@@ -32,5 +34,5 @@ func TestNewDeckFromFile(t *testing.T) {
 		t.Error("First element differs in deck from file.")
 	}
 
-	deleteFile("cards")
+	deleteFile("_decktesting")
 }
