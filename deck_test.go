@@ -9,6 +9,14 @@ func TestNewDeck(t *testing.T) {
 	if len(deck) != 48 {
 		t.Errorf("Invalid amount of cards: %d", len(deck))
 	}
+
+	if deck[0].Suit != "Clubs" {
+		t.Errorf("First element suit should be Clubs and got: %s", deck[0].Suit)
+	}
+
+	if deck[0].Number != 1 {
+		t.Errorf("First element suit should be 1 and got: %d", deck[0].Number)
+	}
 }
 
 func TestNewDeckFromFile(t *testing.T) {
