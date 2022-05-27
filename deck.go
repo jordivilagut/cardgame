@@ -13,7 +13,7 @@ func newDeck() deck {
 
 	for _, suit := range suits {
 		for j := 1; j < 13; j++ {
-			card := card{j, suit}
+			card := card{Number: j, Suit: suit}
 			d = append(d, card)
 		}
 	}
